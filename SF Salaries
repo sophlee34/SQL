@@ -1,0 +1,43 @@
+/* Used Kaggle's SQLite dataset on SF Salaries to determine the following questions.*/
+
+/*Set up a list of employees whose base salries are $8K or higher*?
+
+SELECT BasePay, EmployeeName FROM Salaries
+WHERE BasePay >= 80000
+GROUP BY EmployeeName;
+
+/* Lable roles with 0 Overtime Pay as "No OT", greater than $10,000 as "High OT", and everything else as "Regular OT".*/
+
+SELECT JobTitle, OvertimePay,
+CASE 
+WHEN OvertimePay = 0 THEN 'No OT' 
+WHEN OvertimePay > 10000 THEN 'High OT'
+ELSE 'Regular OT'
+END AS OTLevel
+FROM Salaries;
+
+/* Which employees started after 2010? Order the list alphabetcally*/
+
+SELECT EmployeeName FROM Salaries
+WHERE Year > 2010
+ORDER BY EmployeeName asc;
+
+/* Pull employee names and ID where total pay is over $200,000 or base pay is below $10,000*/
+
+SELECT Id, employeename, totalpay, basepay FROM salaries
+WHERE totalpay = 200000 OR basepay < 10000
+ORDER BY Id asc;
+
+/* Which employees started in 2009 or later and have base pay that is $92,000 or higher?*/
+
+SELECT employeename, year, basepay FROM salaries
+WHERE basepay >= 92000 AND year >= 2009
+ORDER BY employeename asc;
+
+/* What is the average basepay for jobs starting in 2010 or later?*/
+
+SELECT AVG(basepay) as average_base, year FROM salaries
+WHERE year >= 2010
+GROUP BY year;
+
+
