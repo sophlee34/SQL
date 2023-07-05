@@ -1,0 +1,29 @@
+/* Created a retail table specifically on clothing brands, items, quantity, price, and country. 
+Then used basic SQL functions and aggregation such as ORDER BY and GROUP By to pull requests*/
+
+CREATE TABLE clothing (id INTEGER PRIMARY KEY, brand TEXT, item TEXT, quantity INTEGER, price INTEGER, country TEXT);
+INSERT INTO clothing VALUES (1, "AE", "Shorts", 2, 10, "USA");
+INSERT into clothing VALUES (2, "hollister", "skirts", 3, 19, "USA");
+INSERT INTO clothing VALUES (3, "Lululemon", "hats", 5, 90, "Italy");
+Insert INTO clothing VALUES (4, "Vuori", "shirts", 100, 78, "Korea");
+INSERT INTO clothing VALUES (5, "Aritzia", "pants", 55, 200, "France"); 
+INSERT INTO clothing VALUES (6, "Zara", "sunglasses", 4, 9, "USA");
+INSERT INTO clothing VALUES (7, "Amazon", "shoes", 10, 5, "China");
+INSERT INTO clothing VALUES (8, "Madewell", "sweaters", 14, 56, "Spain");
+INSERT INTO clothing VALUES (9, "Abercrombie", "dresses", 30, 20, "Italy");
+INSERT INTO clothing VALUES (10, "Nike", "running shorts", 18, 40, "China");
+INSERT INTO clothing VALUES (11, "Shein", "bags", 17, 3, "China");
+INSERT INTO clothing VALUES (12, "Chanel", "cardigans", 40, 1000, "France");
+INSERT INTO clothing VALUES (13, "Dior", "scarfs", 30, 90, "France");
+INSERT INTO clothing VALUES (14, "Aerie", "socks", 22, 13, "Japan");
+INSERT INTO clothing VALUES (15, "Banana Republic", "bracelets", 70, 4, "USA");
+
+SELECT item FROM clothing ORDER BY price desc;
+SELECT item, SUM(price) FROM clothing GROUP BY item;
+SELECT brand, SUM(price) FROM clothing GROUP BY brand;
+
+
+
+
+
+
