@@ -1,0 +1,30 @@
+Used Amazon Customer Reviews dataset from Kaggle to determine the following quesitons. 
+
+/* Which profiles have the "best" in the summary? What are the scores?*/
+
+SELECT ProfileName, score, summary FROM Amazon.Reviews
+WHERE summary LIKE '%best%'
+ORDER BY ProfileName asc;
+
+/* Which products have helpfulness numerator between 2-5?*/
+
+SELECT productid, helpfulnessnumerator FROM Amazon.Reviews
+WHERE helpfulnessnumerator BETWEEN 2 AND 5
+GROUP BY productid;
+
+/* Find account id and text for all items except for Twizzlers*/
+
+SELECT UserId, text FROM amazon.Reviews
+WHERE text NOT LIKE '%twizzlers' OR text NOT LIKE '%twizzlers%' OR text NOT LIKE 'Twizzlers%'
+GROUP BY userid;
+
+/* What is the average score of tea products*/
+
+SELECT productid, AVG(score) as avg_score, summary FROM amazon.reviews
+WHERE summary LIKE 'Tea%' OR summary LIKE '%tea%' OR summary LIKE '%tea'
+GROUP BY productid;
+
+
+
+
+ 
