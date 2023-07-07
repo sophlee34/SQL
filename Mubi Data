@@ -1,0 +1,42 @@
+--This is a project using a dataset of a streaming platform, Mubi, where we look at multiple tables 
+and use JOIN, window, and subquery to define the following questions.--
+
+
+--Remove critics that have null values--
+
+SELECT * FROM mubi_db.ratings
+WHERE critic IS NOT NULL
+ORDER BY movie_id;
+
+--Create a table with titles and ratings for--
+
+SELECT DISTINCT m.movie_title, r.rating_score FROM mubi_db.movies m
+LEFT JOIN mubi_db.ratings r ON m.movie_id = r.movie_id
+WHERE r.rating_score IS NOT NULL
+ORDER BY m.movie_title;
+
+--Find the average popularity for every movie release year--
+
+SELECT movie_release_year, AVG(movie_popularity) OVER (PARTITION BY movie_release_year) AS "avg_popularty_year"
+FROM mubi_db.movies
+WHERE movie_release_year IS NOT NULL
+GROUP BY movie_id;
+
+--Find avatar images from users who rated between 2010-01-01 and 2017-12-31--
+
+SELECT user_id, rating_date_utc, user_avatar_image_URL FROM mubi_db.ratings_users
+WHERE rating_date_utc > '2010-01-01' AND rating_date_utc < '2017-12-31'
+ORDER BY user_id;
+
+--List director's name, url, and movie popularity where popularity is higher than the average-- 
+
+SELECT director_name, director_url, movie_popularity FROM mubi_db.movies
+WHERE movie_popularity > (SELECT AVG(movie_popularity) FROM mubi_db.movies)
+GROUP BY director_id;
+
+-- How many reviews does each director have?--
+
+SELECT movies.director_name,
+(SELECT COUNT(rating_score) FROM mubi_db.ratings WHERE movies.movie_id = ratings.movie_id) as rating_qty 
+FROM mubi_db.movies;
+
