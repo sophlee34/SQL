@@ -1,4 +1,4 @@
-/* Used Kaggle's SQLite dataset on SF Salaries to determine the following questions.*/
+/* Used Kaggle's SQLite dataset on SF Salaries to perform data analysis and determine the following questions.*/
 
 /*Set up a list of employees whose base salries are $8K or higher*?
 
